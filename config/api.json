@@ -2,14 +2,14 @@
 	"swagger": "2.0",
 	"info": {
 		"version": "v1",
-		"title": "Contact List",
-    	"description": "A Contact list API based on Swagger and built using Node.js"
+		"title": "Garbage Location",
+    	"description": "A REST API based on Swagger and built using Node.js.The purpose of this app is to collect information about the location of garbage so that it's easy to track and identify patterns in garbage."
 	},
 	"paths": {
-		"/contacts": {
-			"get": {
-				"tags": ["Contacts"],
-				"operationId": "contacts_get",
+		"/gld": {
+			"post": {
+				"tags": ["Garbage location and description data "],
+				"operationId": "dbQuery",
 				"consumes": [],
 				"produces": ["application/json",
 				"text/json"],
@@ -19,7 +19,7 @@
 						"schema": {
 							"type": "array",
 							"items": {
-								"$ref": "#/definitions/Contact"
+								"$ref": "#/definitions/Garbage"
 							}
 						}
 					}
@@ -27,7 +27,7 @@
 				"deprecated": false
 			}
 		},
-		"/contacts/{id}": {
+		"/get_req_by_id/{id}": {
 			"get": {
 				"tags": ["Contacts"],
 				"operationId": "contacts_getById",
@@ -38,8 +38,8 @@
 					"name": "id",
 					"in": "path",
 					"required": true,
-					"type": "integer",
-					"format": "int32"
+					"type": "string"
+					
 				}],
 				"responses": {
 					"200": {
@@ -57,20 +57,75 @@
 		}
 	},
 	"definitions": {
-		"Contact": {
+		"Garbage": {
 			"type": "object",
 			"properties": {
-				"id": {
-					"format": "int32",
-					"type": "integer"
+				"phone_id": {
+					"type": "string",
+					"description": "An arbitrary ID of the phone from which the data comes from.It should be unique for the phone and non-changable."
 				},
-				"name": {
-					"type": "string"
+				"curr_date": {
+					"type": "string",
+					"description": "The date on which we created the request."
 				},
-				"email": {
-					"type": "string"
+				"curr_time": {
+					"type": "string",
+					"description": "The exact time of the request."
+				},
+				"longitude" :{
+					"type" : "string",
+					"description": "Spatial coordinate"
+				},
+				"latitude" :{
+					"type" : "string",
+					"description": "Spatial coordinate"
+				},
+				"is_plastic" :{
+					"type" : "boolean",
+					"description": "Is the garbage a plastic ?"
+				},
+				"is_cigarettes" :{
+					"type" : "boolean",
+					"description": "Is the garbage cigarette butts ?"
+				},
+				"is_glass" :{
+					"type" : "boolean",
+					"description": "Is the garbage a glass material ?"
+				},
+				"is_food_waste" :{
+					"type" : "boolean",
+					"description": "Is the garbage a food waste ?"
+					
+				},
+				"is_paper" :{
+					"type" : "boolean",
+					"description": "Is the garbage a paper material ?"
+				},
+				"is_chemicals" :{
+					"type" : "boolean",
+					"description": "Is the garbage a chemical ?"
+				},
+				"is_metal" :{
+					"type" : "boolean",
+					"description": "Is the garbage a metal material ?"
+				},
+				"will_be_picked_up" :{
+					"type" : "boolean",
+					"description": "Is the user going to pickup the garbage now ?"
+				},
+				"quantity" :{
+					"type" : "string",
+					"description": "How much approximately is the garbage?Use 'LOW' for \\< 1kg , 'MED' for 1-5kg and 'HIGH' for \\>10kg "
+				},
+				"picture_id" :{
+					"type" : "string",
+					"description": "A globally unique ID of a picture of the garbage.Serves to link the data with media datastore."
 				}
-			}
+			
+			},
+			"required" : ["phone_id","curr_date","curr_time","longitude","latitude",
+						  "is_plastic","is_cigarettes","is_glass","is_food_waste","is_paper","is_chemicals","is_metal",
+						"will_be_picked_up","quantity"]
 		}
 	}
 }

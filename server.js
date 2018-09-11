@@ -8,13 +8,12 @@ var bodyParser = require('body-parser');
 var swaggerize = require('swaggerize-express');
 var swaggerUi = require('swaggerize-ui'); // second change
 var path = require('path');
-
 var app = express();
 
 var server = http.createServer(app);
-
 app.use(bodyParser.json());
 
+//tst.transaction();
 app.use(swaggerize({
     api: path.resolve('./config/api.json'), // third change
     handlers: path.resolve('./handlers'),
