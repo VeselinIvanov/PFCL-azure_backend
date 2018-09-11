@@ -20,7 +20,8 @@
     "express": "^4.0.0",
     "jsonpath": "^0.2.0",
     "swaggerize-express": "^3.0.0",
-    "swaggerize-ui": "^1.0.1"
+    "swaggerize-ui": "^1.0.1",
+    "tedious": "^2.6.4"
   },
   "devDependencies": {
     "tape": "^3.0.0",
